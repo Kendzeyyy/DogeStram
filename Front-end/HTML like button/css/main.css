@@ -1,0 +1,61 @@
+html {
+ background-color: #141518;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+body{
+    padding: 50px;
+}
+
+
+.imgbackground{
+    
+    margin: auto;
+    width: auto;
+    padding: 10px;
+
+    background: transparent;
+    box-shadow: 0 10px 20px rgba (0,0,0,0.5);
+    
+    background: rgba(255,255,255,0.1);
+    border-radius: 15px;
+    transition: .5s;
+    
+}
+
+#testing{
+    
+    margin: auto;
+    max-width: 100%;
+    padding: 10px;
+    height: auto;
+    margin: auto;
+    
+}
+
+
+h2 {
+    margin: 0 0 10px 0;
+    padding: 5px;
+    color: #F0FFFF;
+    text-align: left top;
+    width: auto;
+}
+
+
+
+
+
+/*---------------------------Mediq Queries-------------------------------*/
+
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+    .imgbackround{
+        width: auto;
+        margin: auto;
+    }
+}
+
