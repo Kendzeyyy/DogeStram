@@ -1,10 +1,16 @@
-header ul{
-    display: flex;
+header{
     position:fixed;
     width:100%;
     margin:0;
+    padding:0;
     top:0;
     left:0;
+}
+
+header ul{
+    display: flex;
+    margin:0;
+    padding:0;
 }
 
 body{
@@ -23,14 +29,19 @@ li{
     text-align: center;
 }
 
-footer ul{
-    height:40px;
+footer{
     width:100%;
     margin:0;
+    padding:0;
     position:fixed;
-    display:flex;
     right:0;
     bottom:0;
+}
+
+footer ul{
+    display:flex;
+    margin:0;
+    padding: 0;
 }
 
 .red{
@@ -57,10 +68,6 @@ footer ul{
         bottom: auto;
         width: 60%;
 
-    }
-
-    footer p{
-        text-align: center;
     }
 
     #user{
