@@ -1,4 +1,4 @@
-header{
+header ul{
     display: flex;
     position:fixed;
     width:100%;
@@ -12,7 +12,8 @@ body{
     background-color: #141518;
 }
 
-box{
+li{
+    list-style: none;
     padding:5px;
     height:40px;
     border: solid 1px black;
@@ -22,7 +23,7 @@ box{
     text-align: center;
 }
 
-footer{
+footer ul{
     height:40px;
     width:100%;
     margin:0;

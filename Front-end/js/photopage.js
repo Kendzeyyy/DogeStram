@@ -2,7 +2,7 @@
 
 /*
 Function to show images. One has to get images as json.
-
+get: servletName?kategoria=2
  */
 const showImages = (jsonImages) => {
     const ul = document.querySelector('ul');
@@ -31,6 +31,9 @@ const showImages = (jsonImages) => {
     });
 };
 
+/*
+Get the elements and adding
+ */
 const trending = document.querySelector("#trending");
 const fresh = document.querySelector("#fresh");
 const home = document.querySelector("#home");
@@ -39,6 +42,7 @@ const search = document.querySelector("#search");
 
 trending.addEventListener("click",(clicky) => {
     console.log("trending");
+    /*showImages("servletName?kategoria=2");*/
 });
 
 fresh.addEventListener("click",(clicky) => {
@@ -47,10 +51,12 @@ fresh.addEventListener("click",(clicky) => {
 
 home.addEventListener("click",(clicky) => {
     console.log("home");
+
 });
 
 user.addEventListener("click",(clicky) => {
     console.log("user");
+    window.location.href ="login.html";
 });
 
 search.addEventListener("click",(clicky) => {
