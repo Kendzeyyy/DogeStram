@@ -8,12 +8,9 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
         <link rel="stylesheet" href="css/main.css">
     </head>
+
     
 <body>
-    
-    <div id="backgroundimg">
-  <!--  <img src="Doggos/shiba-inu-1904871_960_720.jpg" class="image1"/>   -->
-    </div>
     
     <div class = "login">
         
@@ -22,10 +19,13 @@
             
             <!-- Input box -->    
             <form>
-            <input type="text" name="username" placeholder="Enter Username">
-            <input type ="password" name="password" placeholder="Enter Password">
-            <input type ="password" name="password" placeholder="Enter Password Again">
-            <input type="submit" value="Next">
+            <input type ="text" name="username" placeholder="Enter Username" required>
+                
+            <input type ="password" name="password" placeholder="Enter Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                
+            <input type ="password" name="password" placeholder="Enter Password Again" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
+                
+            <input type ="submit" value="Next">
             </form>
                
                 
