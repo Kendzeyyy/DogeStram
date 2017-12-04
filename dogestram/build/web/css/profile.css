@@ -1,0 +1,83 @@
+
+
+body{
+    font-family: sans-serif;
+    background-color: #141518;
+}
+
+.profile {
+    align-content: center;
+    text-align: center;
+    margin-top: 10%;
+
+}
+#profileimage {
+    border: solid 5px black;
+    border-radius: 10px;
+    max-width: 40%;
+    height: auto;
+}
+
+
+
+h2 {
+    color: green;
+}
+
+ul li, #posts, #likes{
+    padding:5px;
+    height:40px;
+    border: solid 1px black;
+    border-radius: 10px;
+    opacity: 0.5;
+    font-size: 16px;
+    text-align: center;
+}
+.profilebuttons{
+    width: 100%;
+    padding: 5px;
+    height: 40px;
+    display: flex;
+
+}
+
+
+ul{
+    height:40px;
+    width:100%;
+    margin:0;
+    position:fixed;
+    display:flex;
+    right:0;
+    bottom:0;
+}
+
+.red, #likes,#posts{
+    background-color: #ed292a;
+}
+
+
+
+.smaller{
+    width:100%;
+}
+
+/*-------media queries---------*/
+
+@media only screen and (min-width: 1024px){
+    header ul{
+        width:40%;
+    }
+
+    ul{
+        top:0;
+        bottom: auto;
+        width: 100%;
+
+    }
+
+    footer p{
+        text-align: center;
+    }
+
+}

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>DogeStram Sign Up</title>
+        <title>DogeStram Log In</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -18,21 +18,26 @@
     <div class = "login">
         
             <div class = "glass">
-                <h2> Sign Up </h2>
+                <h2> Log In </h2>
             
+                
+            <form method="post" action="do" enctype="multipart/form-data">
+                <input type="file" name="kuva" accept="image/*">
+                <input type="submit" value="upload">
+            </form>
             <!-- Input box -->    
-            <form method="post" action="db/service/setpass">
+            <form method="get" action="db/service">
             <input type="text" name="username" placeholder="Enter Username">
             <input type ="password" name="password" placeholder="Enter Password">
-            <input type ="password" name="password" placeholder="Enter Password Again">
-            <input type="submit" value="Next">
+            <input type ="submit" name="login" value="Log In">
             </form>
                
                 
             <div class="bottom-input">
-                <a href="../index.html"></a>
-                <form method="get" action="../index.html">
-                    <input type="submit" value="Cancel">
+                <h5>New user?</h5>
+                <a href="Sign-up-site/SignUp.html"></a>
+                <form method="get" action="SignUp.html">
+                <input type="submit" value="Create Account" value="Sign up"> 
                 </form>    
             </div>    
                 
