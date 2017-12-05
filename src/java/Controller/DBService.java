@@ -66,57 +66,55 @@ public class DBService {
     }*/
      @POST
     @Produces(MediaType.APPLICATION_JSON)
-        @Path("lol")
-     public Users post(@FormParam("username") String name, @FormParam("password") String pass) {
+        @Path("login")
+     public Users login(@FormParam("username") String name, @FormParam("password") String pass) {
         
                 Users u = new Users();
                 
-                List<Users> lista1 = dbc.findNameAndPass(name, pass);
+                List<Users> nameAndPassList = dbc.findNameAndPass(name, pass);
                 
                 
-            if (lista1.isEmpty()) {
+            if (nameAndPassList.isEmpty()) {
                 
                return null;
                 
                 
             }else {
                 
-            Users users = lista1.get(0);
+            Users users = nameAndPassList.get(0);
             int id = users.getId();
             return users;
             
             
             }
+    }
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+        @Path("signup")
+     public Users signup(@FormParam("username") String name, @FormParam("password") String pass, @FormParam("password2") String pass2) {
                 
-                
-                
-                
-                
-                
-/*try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://10.114.32.21:3306/test", "juhoDB", "pessi");
-            java.sql.Statement stmt = con.createStatement();
- 
-            String SQL = "SELECT * FROM test.Users WHERE name='" + name + "'";
- 
-            ResultSet rs = stmt.executeQuery(SQL);
- 
-            if (rs.next()) {
-                
-               out.println("Username taken!");
- 
-            } else {
-                u.setName(name);
+                         Users u = new Users();
+
+        List<Users> nameList = dbc.findUser(name);
+        
+        if (nameList.isEmpty()) {
+            
+            if(pass.equals(pass2)) {
+            u.setName(name);
+            u.setPasswd(pass);
+            
+            return dbc.insert(u);
+            
             
             }
- 
-        } catch (Exception e) {
- 
-            out.println("Error : " + e.getMessage());
-        }
-        return dbc.insert(u);*/
-    }
+            
+            
+     } 
+        return null;
+                
+                
+
+     }
    
     
    
