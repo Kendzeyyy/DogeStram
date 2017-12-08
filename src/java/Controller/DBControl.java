@@ -12,7 +12,9 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import model.Comments;
 import model.Users;
+import model.Photos;
  
 /**
  *
@@ -22,6 +24,7 @@ import model.Users;
 public class DBControl {
    
     @PersistenceContext
+    
     private EntityManager em;
  
     public DBControl() {
@@ -29,7 +32,13 @@ public class DBControl {
     public List<Users> getAll(){
         
         return em.createNamedQuery("Users.findAll").getResultList();
-        //List<User> lst = em.createNamedQuery("User.findAll").getResultList(); return lst;
+
+    }
+    
+     public List<Comments> getCOmments(){
+        
+        return em.createNamedQuery("Comments.findAll").getResultList();
+        
     }
     
     public List<Users> findNameAndPass(String name, String pass) {
@@ -53,6 +62,12 @@ public class DBControl {
     
     }
     
+    public List<Photos> getAllPhotos(){
+        
+        return em.createNamedQuery("Photos.findAll").getResultList();
+        
+    }
+    
     
     
         //asking user object, because we don't now that user id yet
@@ -61,6 +76,13 @@ public class DBControl {
         
         
         return u;
+    }
+    
+    public Comments insertComm (Comments c){
+        em.persist(c);
+        
+        
+        return c;
     }
     
     

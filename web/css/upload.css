@@ -1,4 +1,10 @@
-
+html{
+background: url(../Doggos/8526262998_82978321a4_b.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 
 body {
     font-family: sans-serif;
@@ -7,7 +13,7 @@ body {
 }
 
 
-.login{
+.upload{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -39,30 +45,44 @@ h2 {
     text-align: center;
 }
 
-.login input{
+.upload input{
     width: 100%;
     margin-bottom: 20px;
 }
 
-.login input[type="text"],
-.login input[type="password"]{
-    border: none;
-    border-bottom: 2px solid #F0FFFF;
-    outline: none;
-    height: 40px;
-    color: #F0FFFF;
-    background: transparent;
-    font-size: 16px;
-    padding-left: 20px;
-    box-sizing: border-box;
+
+.fileupload{
+    padding-bottom: 20px;
 }
 
-.bottom-input{
-    text-align: center;
-    color: #F0FFFF;
+.fileupload input[type=file]{
+
+    font-size: 30px;
+    position: absolute;
+    top: 43%;
+    left: 18%;
+    opacity: 0;
+    width: 63%;
 }
 
-.login input[type="submit"]{
+.fileupload input[type="submit"]{
+    top: 5px;
+    margin-top: 20px;
+}
+
+.btn{
+    border: 2px solid gray;
+    color: gray;
+    background-color: lightgray;
+    padding: 8px 24px;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+
+.upload input[type="submit"]{
     border: none;
     outline: none;
     height: 40px;
@@ -87,7 +107,7 @@ h2 {
     cursor: pointer;
 }
 
-.login input[type="submit"]:hover{
+.upload input[type="submit"]:hover{
     background: green;
     cursor: pointer;
   -webkit-transition: background-color .3s ease-out;
@@ -105,8 +125,6 @@ h2 {
   -o-transition: background-color .2s ease-out;
   transition: background-color .2s ease-out;
 }
-
-
 
 
 

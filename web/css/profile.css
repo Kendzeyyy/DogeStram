@@ -9,7 +9,7 @@ body{
     align-content: center;
     text-align: center;
     margin-top: 10%;
-
+    color: darkgray;
 }
 #profileimage {
     border: solid 5px black;
@@ -33,12 +33,21 @@ ul li, #posts, #likes{
     font-size: 16px;
     text-align: center;
 }
-.profilebuttons{
+.profilebuttons{    
     width: 100%;
     padding: 5px;
     height: 40px;
-    display: flex;
 
+}
+
+#Likes{
+    position: fixed;
+    left: 500px;
+}
+
+#Posts{
+    position: fixed;
+    right: 500px;
 }
 
 
@@ -48,7 +57,7 @@ ul{
     margin:0;
     position:fixed;
     display:flex;
-    right:0;
+    right:20px;
     bottom:0;
 }
 
@@ -61,6 +70,13 @@ ul{
 .smaller{
     width:100%;
 }
+
+.menu{
+    position: fixed;
+    top: 50px;
+    right: 20px;
+}
+
 
 /*-------media queries---------*/
 

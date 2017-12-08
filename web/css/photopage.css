@@ -56,6 +56,12 @@ footer ul{
     width:33%;
 }
 
+.circle {
+    position: fixed;
+    bottom: 60px;
+    right: 20px;
+}
+
 /*-------media queries---------*/
 
 @media only screen and (min-width: 1024px){

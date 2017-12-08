@@ -1,4 +1,10 @@
-
+html{
+background: url(../Doggos/shiba-inu-1904871_960_720.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 
 body {
     font-family: sans-serif;
@@ -24,7 +30,7 @@ body {
 .glass{
     width: 100%;
     height: 100%;
-    padding: 25%;
+    padding: 20%;
     box-sizing: border-box;
     background: rgba(255,255,255,0.1);
     border-radius: 5px;
@@ -85,6 +91,7 @@ h2 {
     color: #000000;
     border-radius: 20px;
     cursor: pointer;
+    
 }
 
 .login input[type="submit"]:hover{
@@ -106,11 +113,7 @@ h2 {
   transition: background-color .2s ease-out;
 }
 
-
-
-
-
-
+    
 
 /*---------------------------Mediq Queries-------------------------------*/
 
@@ -121,7 +124,3 @@ h2 {
         margin: auto;
     }
 }
-
-
-
-

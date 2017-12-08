@@ -9,17 +9,18 @@
  */
 package Controller;
  
-import static java.lang.System.out;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
+
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ws.rs.Produces;
 import javax.ws.rs.*;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.NewCookie;
+import javax.ws.rs.core.Response;
+import model.Comments;
 import model.Users;
+import model.Photos;
  
 /**
  * REST Web Service
@@ -28,9 +29,12 @@ import model.Users;
 
 @Path("service")
 public class DBService {
+    
  
     @EJB
     private DBControl dbc;
+    
+    private NewCookie cookie;
  
     /**
      * Creates a new instance of DBService
@@ -38,17 +42,23 @@ public class DBService {
     public DBService() {
     }
  
-    /**
-     * Retrieves representation of an instance of Controller.DBService
-     * @return an instance of java.lang.String
-     */
+   
     @GET
     @Produces(MediaType.APPLICATION_JSON)
 
     public List<Users> getJson() {
-     
-              
+                   
         return dbc.getAll();
+    }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("getcomments")
+
+    public List<Comments> getComments() {
+                   
+        return dbc.getCOmments();
+
     }
  
    /* @POST
@@ -65,9 +75,9 @@ public class DBService {
         
     }*/
      @POST
-    @Produces(MediaType.APPLICATION_JSON)
+    //@Produces(MediaType.APPLICATION_JSON)
         @Path("login")
-     public Users login(@FormParam("username") String name, @FormParam("password") String pass) {
+     public Response login(@FormParam("username") String name, @FormParam("password") String pass) {
         
                 Users u = new Users();
                 
@@ -80,10 +90,15 @@ public class DBService {
                 
                 
             }else {
-                
+           
             Users users = nameAndPassList.get(0);
+            
             int id = users.getId();
-            return users;
+            
+            NewCookie cookieNew = new NewCookie("cookieNew", "newCookie"+id);
+            
+            return Response.ok("OK").cookie(cookie).build();
+            
             
             
             }
@@ -112,9 +127,46 @@ public class DBService {
      } 
         return null;
                 
-                
+    }
+     
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("random") 
+     public List<Photos> randomPhotos() {
+         
+        
+         
+         if (cookie == null) {
+             
+        return null;
+    } else {
+             
+       List<Photos> photos = dbc.getAllPhotos();
+         //Collections.shuffle(photos);         //Collections.shuffle(photos);
+         
+         return photos;
+    }
 
+         
      }
+     
+      @POST
+    @Produces(MediaType.APPLICATION_JSON)
+        @Path("addcomment")
+           public Comments addComment(@FormParam("comments") String comm) {
+
+               Comments c = new Comments();
+          
+               
+               
+               c.setComment(comm);
+               
+               return dbc.insertComm(c);
+           }
+
+
+         
+
    
     
    

@@ -33,7 +33,8 @@ public class Servlet extends HttpServlet {
         response.setContentType("application/json");
         try (PrintWriter out = response.getWriter()) {
             request.getPart("fileup").write(request.getPart("fileup").getSubmittedFileName());
-            out.print("{\"src\" : \"//10.114.32.21/uploads/" + request.getPart("fileup").getSubmittedFileName() +"\"}");
+            out.print("{\"src\" : \"10.114.32.21/uploads/" + request.getPart("fileup").getSubmittedFileName() +"\"}");
+            
         }
     }
 
