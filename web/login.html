@@ -19,19 +19,12 @@
         
             <div class = "glass">
                 <h2> Log In </h2>
-            
-            <form method="post" action="db/service/random">
-            <input type ="submit" name="randomi" value="randomNappi">
-            </form>   
-            <form method="post" action="do" enctype="multipart/form-data">
-                <input type="file" name="fileup" accept="image/*">
-                <input type="submit" value="upload">
-            </form>
+         
             <!-- Input box -->    
-            <form method="post" action="db/service/login">
+            <form id="loggingin" method="post" action="db/service/login">
             <input type="text" name="username" placeholder="Enter Username">
             <input type ="password" name="password" placeholder="Enter Password">
-            <input type ="submit" name="login" value="Log In">
+            <input type ="submit" name="login" value="Log In" id="submitbutton">
             </form>
                
                 
@@ -39,16 +32,12 @@
                 <h5>New user?</h5>
                 <a href="Sign-up-site/SignUp.html"></a>
                 <form method="get" action="SignUp.html">
-                <input type="submit" value="Create Account" value="Sign up"> 
+                <input type="submit" value="Create Account" > 
                 </form>    
             </div>    
-                
+            
         </div>
     </div>
-    
+    <script src="js/logging.js"></script>
 </body>
-<footer>
-    
-    
-</footer>
 </html>

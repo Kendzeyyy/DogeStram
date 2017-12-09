@@ -13,6 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -35,6 +37,13 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Comments.findByDateAdded", query = "SELECT c FROM Comments c WHERE c.dateAdded = :dateAdded")
     , @NamedQuery(name = "Comments.findByFlag", query = "SELECT c FROM Comments c WHERE c.flag = :flag")})
 public class Comments implements Serializable {
+    
+    @JoinColumn(name = "photo_id", referencedColumnName = "photo_id")
+    @ManyToOne(optional = false)
+    private Photos photoId;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Users userId;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -114,4 +123,19 @@ public class Comments implements Serializable {
         return "model.Comments[ commentId=" + commentId + " ]";
     }
     
+     public Photos getPhotoId() {
+        return photoId;
+    }
+
+    public void setPhotoId(Photos photoId) {
+        this.photoId = photoId;
+    }
+
+    public Users getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Users userId) {
+        this.userId = userId;
+    }
 }

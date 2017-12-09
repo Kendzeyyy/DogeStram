@@ -5,11 +5,9 @@
         <group>
             <file>file:/C:/Users/JuhaVuokko/Documents/NetBeansProjects/dogestram/web/js/photopage.js</file>
             <file>file:/C:/Users/JuhaVuokko/Documents/NetBeansProjects/dogestram/src/java/model/Users.java</file>
-            <file>file:/C:/Users/JuhaVuokko/Documents/NetBeansProjects/dogestram/web/js/main.js</file>
-            <file>file:/C:/Users/JuhaVuokko/Documents/NetBeansProjects/dogestram/web/index.html</file>
             <file>file:/C:/Users/JuhaVuokko/Documents/NetBeansProjects/dogestram/src/java/Controller/DBControl.java</file>
+            <file>file:/C:/Users/JuhaVuokko/Documents/NetBeansProjects/dogestram/web/login.html</file>
             <file>file:/C:/Users/JuhaVuokko/Documents/NetBeansProjects/dogestram/src/java/model/Photos.java</file>
-            <file>file:/C:/Users/JuhaVuokko/Documents/NetBeansProjects/dogestram/src/java/model/Comments.java</file>
             <file>file:/C:/Users/JuhaVuokko/Documents/NetBeansProjects/dogestram/src/java/Controller/DBService.java</file>
         </group>
     </open-files>

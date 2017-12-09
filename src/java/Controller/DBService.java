@@ -10,6 +10,7 @@
 package Controller;
  
 import static java.lang.System.out;
+import java.net.URI;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -19,6 +20,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.*;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 import model.Users;
@@ -87,19 +89,35 @@ public class DBService {
                 
             Users users = nameAndPassList.get(0);
             int id = users.getId();
-            
-            NewCookie idcookie = new NewCookie("myIdCookie",""+id);
-            Response.ResponseBuilder rb = Response.ok("id of user is " +id);
-            Response response = rb.cookie(idcookie).build();
-            return response;
-            
-            
+            try{
+            URI indexuri = new URI("");
+            List<Photos> photos = dbc.findPhotosByUser(id);
+            StringBuilder data = new StringBuilder();
+            for(int i = 0; i < photos.size();i++){
+                data.append("Adder of photo: ");
+                Users photoadder = photos.get(i).getUserId();
+                data.append(photoadder.getId());
+                data.append("Photo location: ");
+                data.append(photos.get(i).getPhotoLocation());
+                data.append("\n");
             }
+           NewCookie idcookie = new NewCookie("myIdCookie",""+id);
+            Response.ResponseBuilder rb = Response.ok(data.toString());
+            rb.contentLocation(indexuri);
+            Response response = rb.cookie(idcookie).build();
+                return response;
+            }catch(Exception e){
+                Response.ResponseBuilder rb = Response.status(1, e.toString());
+                Response responce = rb.build();
+                return responce;
+            }
+            
+        }
     }
     @POST
     @Produces(MediaType.APPLICATION_JSON)
         @Path("signup")
-     public Users signup(@FormParam("username") String name, @FormParam("password") String pass, @FormParam("password2") String pass2) {
+     public List<Photos> signup(@FormParam("username") String name, @FormParam("password") String pass, @FormParam("password2") String pass2) {
                 
                          Users u = new Users();
 
@@ -111,7 +129,7 @@ public class DBService {
             u.setName(name);
             u.setPasswd(pass);
             
-            return dbc.insert(u);
+            return dbc.findPhotosOrganizedByDate(3, 0);
             
             
             }

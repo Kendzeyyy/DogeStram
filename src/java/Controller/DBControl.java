@@ -7,6 +7,7 @@
  */
 package Controller;
  
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -60,7 +61,21 @@ public class DBControl {
         
     }
     
+    public List<Photos> findPhotosByUser(int id){
+        List<Photos> photos = em.createNamedQuery("Photos.findAll").getResultList();
+        ArrayList<Photos> photosbyuser = new ArrayList();
+        for(int i = 0; i < photos.size();++i){
+            if(((int)photos.get(i).getUserId().getId()) == id){
+                photosbyuser.add(photos.get(i));
+            }
+        }
+        return photosbyuser;
+    }
     
+    public List<Photos> findPhotosOrganizedByDate(int amount, int startingIndex){
+        return em.createNamedQuery("Photos.orderedByDateAdded")
+                .setFirstResult(startingIndex).setMaxResults(amount).getResultList();
+    }
     
         //asking user object, because we don't now that user id yet
     public Users insert (Users u){

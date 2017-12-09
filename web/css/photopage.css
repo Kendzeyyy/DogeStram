@@ -56,6 +56,21 @@ footer ul{
     width:33%;
 }
 
+.circle {
+    color: wheat;
+    position: fixed;
+    bottom: 60px;
+    right: 20px;
+}
+
+.firstimg{
+    position: fixed;
+    left: 10px;
+    top: 50px;
+    border-radius: 6px;
+    flex: inline-block;
+}
+
 /*-------media queries---------*/
 
 @media only screen and (min-width: 1024px){
