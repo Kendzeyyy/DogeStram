@@ -34,30 +34,16 @@ const showImages = (jsonImages) => {
 /*
 Get the elements and adding
  */
-const trending = document.querySelector("#trending");
-const fresh = document.querySelector("#fresh");
+
 const home = document.querySelector("#home");
-const user = document.querySelector("#user");
 const search = document.querySelector("#search");
 
-trending.addEventListener("click",(clicky) => {
-    console.log("trending");
-    /*showImages("servletName?kategoria=2");*/
-});
-
-fresh.addEventListener("click",(clicky) => {
-    console.log("fresh");
-});
 
 home.addEventListener("click",(clicky) => {
     console.log("home");
     window.location.href ="index.html";
 });
 
-user.addEventListener("click",(clicky) => {
-    console.log("user");
-    window.location.href ="login.html";
-});
 
 search.addEventListener("click",(clicky) => {
     console.log("search");

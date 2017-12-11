@@ -11,10 +11,23 @@
         <link rel="stylesheet" href="css/ImageSite.css">
         <link rel="stylesheet" href="css/font-awesome.css">
     </head>
+        
     
 <body>
    <div id = "imgbackground">
+       
+       <div class="top-buttons">
+           
+            <a href="index.html" id="return">
+            <i class="fa fa-2x fa-long-arrow-left" aria-hidden="true" style="color:white"></i>
+            </a>
+           
+            <a href="" id="menu">    
+            <i class="fa fa-2x fa-bars" aria-hidden="true" style="color:white"></i>
+            </a>
 
+       </div>
+       
         <h3> Good boi Doggo </h3>
             <img id="testing" src="Doggos/husky-609554_960_720.jpg">
            
@@ -26,33 +39,27 @@
                 
                 <i class="fa fa-3x fa-chevron-down" aria-hidden="true" style="color:red"></i>
        
-                <i class="fa fa-3x fa-comment-o" aria-hidden="true" style="color:white"></i>
+                <i class="fa fa-3x fa-share" aria-hidden="true" style="color:lightgray"></i>
                     
-                </div>    
+                </div>   
+
        
        
                 <!-- COMMENT BOX -->
-                <form action="db/servise/addcomment" target="processForm1" method="post">
+                <form action="/html/tags/html_form_tag_action.cfm" target="processForm1" method="post">
                 <div id = "comment">
-                 <input name="comments" id="comments" style="resize: horizontal ; width: 75%;">
-                 <!--minlength="1" maxlength="120"-->
-                </div>
+            <textarea name="comments" id="comments" minlength="1" maxlength="120"></textarea>
+        </div>
        
     <input type="submit" value="Send">
        </form>
-                <form>
-                <iframe action="db/service/getcomment" method="get" id="get" width="100%" height="50%"></iframe>
-                </form>
-                
-                <script>
-    function submittheform(){
-        document.forms['get'].submit();
-    }
-</script>
+<iframe name="processForm1" width="100%" height="50%"></iframe>
     </div>
     
 </body>
 
 
-
+<footer>    
+    
+</footer>
 </html>

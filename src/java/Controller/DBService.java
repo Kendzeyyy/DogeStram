@@ -10,11 +10,15 @@
 package Controller;
  
 
+import com.sun.faces.action.RequestMapping;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ws.rs.Produces;
 import javax.ws.rs.*;
 import javax.ws.rs.Path;
+import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
@@ -34,7 +38,13 @@ public class DBService {
     @EJB
     private DBControl dbc;
     
-    private NewCookie cookie;
+        private java.net.URI location;
+           
+    
+    
+    Photos p = new Photos();
+    Users u = new Users();
+
  
     /**
      * Creates a new instance of DBService
@@ -60,6 +70,8 @@ public class DBService {
         return dbc.getCOmments();
 
     }
+    
+    
  
    /* @POST
     @Produces(MediaType.APPLICATION_JSON)
@@ -74,14 +86,17 @@ public class DBService {
         return dbc.insert(u);
         
     }*/
-     @POST
-    //@Produces(MediaType.APPLICATION_JSON)
+     
+        @POST
+        @Produces(MediaType.TEXT_PLAIN)
+               
+        //@Consumes(MediaType.TEXT_PLAIN)
         @Path("login")
-     public Response login(@FormParam("username") String name, @FormParam("password") String pass) {
+     public Response login(@FormParam("username") String name, @FormParam("password") String pass) throws URISyntaxException {
         
-                Users u = new Users();
                 
                 List<Users> nameAndPassList = dbc.findNameAndPass(name, pass);
+                
                 
                 
             if (nameAndPassList.isEmpty()) {
@@ -95,13 +110,23 @@ public class DBService {
             
             int id = users.getId();
             
-            NewCookie cookieNew = new NewCookie("cookieNew", "newCookie"+id);
             
-            return Response.ok("OK").cookie(cookie).build();
+            NewCookie cookie = new NewCookie("keksi", name);
             
+              Response.ResponseBuilder rb = Response.ok("keksi, "
+              + "myDateCookie and myIntCookie sent to the browser");
+            
+            Response response = rb.cookie(cookie).build();
+
+            
+            //java.net.URI location = new java.net.URI("../index.html");
+            //return response;//.temporaryRedirect(location).build();
+            return Response.temporaryRedirect(new URI("../index.html")).cookie(cookie).build();
+
             
             
             }
+            
     }
     @POST
     @Produces(MediaType.APPLICATION_JSON)
@@ -129,24 +154,41 @@ public class DBService {
                 
     }
      
-    @POST
-    @Produces(MediaType.APPLICATION_JSON)
+    @GET
+      @Path("logout")
+    public Response deleteCookie(@CookieParam("keksi") Cookie cookie) throws URISyntaxException{
+        
+        if (cookie != null){
+            NewCookie newCookie = new NewCookie(cookie, "delete cookie", 0, false);
+             
+            return Response.temporaryRedirect(new URI("../index.html")).
+                    cookie(newCookie)
+                    .build();
+            
+            
+            
+    }
+
+            location = new java.net.URI("../index.html");
+            return Response.temporaryRedirect(location).build();
+}
+     
+    @GET
     @Path("random") 
-     public List<Photos> randomPhotos() {
+     public String getCookies(@CookieParam("keksi") String ck) {
          
         
          
-         if (cookie == null) {
+         if (ck == null) {
              
-        return null;
+            return "keksi on rikki = " + ck;
+
     } else {
              
-       List<Photos> photos = dbc.getAllPhotos();
-         //Collections.shuffle(photos);         //Collections.shuffle(photos);
-         
-         return photos;
+                 return "keksi toimii ja on " + ck; 
     }
-
+    
+    
          
      }
      
@@ -158,7 +200,8 @@ public class DBService {
                Comments c = new Comments();
           
                
-               
+               u.getId();
+               p.getPhotoId();
                c.setComment(comm);
                
                return dbc.insertComm(c);

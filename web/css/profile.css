@@ -59,6 +59,7 @@ ul{
     display:flex;
     right:20px;
     bottom:0;
+    list-style-type: none;
 }
 
 .red, #likes,#posts{
@@ -72,10 +73,33 @@ ul{
 }
 
 .menu{
+    width: 80px;
     position: fixed;
     top: 50px;
-    right: 20px;
+    right: 1px;
+    float: right;
+ 
 }
+
+.menu div a{
+    display: block;
+    text-decoration: none;
+    padding: 8px;
+    color: white;
+}
+
+.menu div{
+    background-color: #fff;
+    box-shadow:0 2px 4px 8px rgba(0,0,0,0.2);
+    visibility: hidden;
+}
+
+.menu:hover div{
+    visibility: visible;
+    background: #27292d;
+}
+
+
 
 
 /*-------media queries---------*/

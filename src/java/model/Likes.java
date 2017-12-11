@@ -12,6 +12,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -29,6 +31,13 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Likes.findByLikeId", query = "SELECT l FROM Likes l WHERE l.likeId = :likeId")
     , @NamedQuery(name = "Likes.findByUserLike", query = "SELECT l FROM Likes l WHERE l.userLike = :userLike")})
 public class Likes implements Serializable {
+
+    @JoinColumn(name = "photo_id", referencedColumnName = "photo_id")
+    @ManyToOne(optional = false)
+    private Photos photoId;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Users userId;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -85,6 +94,22 @@ public class Likes implements Serializable {
     @Override
     public String toString() {
         return "model.Likes[ likeId=" + likeId + " ]";
+    }
+
+    public Photos getPhotoId() {
+        return photoId;
+    }
+
+    public void setPhotoId(Photos photoId) {
+        this.photoId = photoId;
+    }
+
+    public Users getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Users userId) {
+        this.userId = userId;
     }
     
 }
