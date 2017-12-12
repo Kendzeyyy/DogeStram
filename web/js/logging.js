@@ -5,7 +5,7 @@
  */
 
 'use strict';
-
+/*
 function getCookie(name) {
     var dc = document.cookie;
     var prefix = name + "=";
@@ -39,10 +39,10 @@ const cookie = () => {
   } else {
       alert("Session expired, please re-login");
       window.location.replace("index.html");
-  }*/
-};
+  }
+};*/
 
-document.onload = cookie();
+//document.onload = cookie();
 
 
 /*

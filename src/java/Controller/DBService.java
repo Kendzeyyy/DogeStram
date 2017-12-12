@@ -12,6 +12,7 @@ package Controller;
 import static java.lang.System.out;
 import java.math.BigDecimal;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -46,6 +47,7 @@ public class DBService {
     @EJB
     private DBControl dbc;
  
+    private java.net.URI location;
     /**
      * Creates a new instance of DBService
      */
@@ -82,7 +84,7 @@ public class DBService {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Path("login")
-     public Response login(@FormParam("username") String name, @FormParam("password") String pass) {
+     public Response login(@FormParam("username") String name, @FormParam("password") String pass) throws URISyntaxException {
         
                 Users u = new Users();
                 
@@ -107,10 +109,10 @@ public class DBService {
             String rtstrn ="{\"status\": \"ok\",\"cookie\": \"" +
             users.getId()+"\"}";*/
             
-            NewCookie cookie = new NewCookie("id",""+users.getId());
+            NewCookie cookie = new NewCookie("keksi",""+users.getId());
             String cs = cookie.getName();
             
-            return Response.ok(users,MediaType.APPLICATION_JSON).cookie(cookie).build();
+            return Response.temporaryRedirect(new URI("../index.html")).cookie(cookie).build();
           
             
             }    
@@ -201,6 +203,23 @@ public class DBService {
         return createJsonArrayFromList(createJObjlistFromPhotosByDate(dbc.findPhotosOrganizedByDate(10, 0)));
     }
     
+    @GET
+      @Path("logout")
+    public Response deleteCookie(@CookieParam("keksi") Cookie cookie) throws URISyntaxException{
+        
+        if (cookie != null){
+            NewCookie newCookie = new NewCookie(cookie, "delete cookie", 0, false);
+             
+            return Response.temporaryRedirect(new URI("../index.html")).
+                    cookie(newCookie)
+                    .build();
+            
+            
+            
+    }
+         location = new java.net.URI("../index.html");
+         return Response.temporaryRedirect(location).build();
+    }
    
     /**
      * PUT method for updating or creating an instance of DBService
