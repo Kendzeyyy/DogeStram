@@ -54,18 +54,23 @@ main ul{
     margin-top:50px;
     margin-left: 0;
     margin-right:0;
+    padding-left:0;
     display:flex;
     flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 main li {
     list-style: none;
-    margin: 10px;
-    margin-left: 5px;
+    margin: 5px;
     padding: 0;
     /*float: left;*/
     max-width: 40%;
-    align-content: center;
+    
+}
+
+main figure{
+    margin:0;
 }
 
 

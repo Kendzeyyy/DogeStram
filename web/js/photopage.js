@@ -5,19 +5,6 @@ Function to show images. One has to get images as json.
 get: servletName?kategoria=2
  */
 
-const showComments = () => {
-    let url = 'http://10.114.32.21:8080/dogestram/db/service/addcomment';
-    fetch(url).then(response =>
-        response.json())
-  .then((out) => {
-      console.log(out);
-      const iframe = document.querySelector('#iframe').contentWindow.document;
-iframe.open();
-iframe.write(out);
-iframe.close();
-  });
-  };
-
 const showImages = (url) => {
     const ul = document.querySelector('main ul');
     fetch(url).then((response) => {
@@ -32,8 +19,8 @@ const showImages = (url) => {
 
             let figc= document.createTextNode("doggy");
 
-            a.href =""; /*HREF NEEDED*/
-            img.src = `http://${image.path}`; /*SRC NEEDED*/
+            a.href ="ImageSite.html"; /*HREF NEEDED*/
+            img.src = `http://${image.path}`; 
 
             a.appendChild(img);
             figurecaption.appendChild(figc);
