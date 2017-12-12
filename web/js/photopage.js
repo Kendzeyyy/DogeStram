@@ -19,7 +19,7 @@ const showImages = (url) => {
 
             let figc= document.createTextNode("doggy");
 
-            a.href ="ImageSite.html"; /*HREF NEEDED*/
+            a.href =`http://10.114.32.21:8080/dogestram/ImageSite.html?p=${image.path}`; 
             img.src = `http://${image.path}`; 
 
             a.appendChild(img);
