@@ -32,20 +32,22 @@
        
        
                 <!-- COMMENT BOX -->
-                <form action="/html/tags/html_form_tag_action.cfm" target="processForm1" method="post">
+                <form action="db/service/addcomment" target="processForm1" method="get">
                 <div id = "comment">
-            <textarea name="comments" id="comments" minlength="1" maxlength="120"></textarea>
-        </div>
+                 <input name="comments" id="comments" style="resize: horizontal ; width: 75%;">
+                 <!--minlength="1" maxlength="120"-->
+                </div>
        
-    <input type="submit" value="Send">
+                <input type="submit" value="Send">
        </form>
-<iframe name="processForm1" width="100%" height="50%"></iframe>
+                <form>
+                <iframe id = "iframe"></iframe>
+                </form>
+                
     </div>
-    
+     <script src="js/imagesite.js"></script>
 </body>
 
 
-<footer>    
-    
-</footer>
+
 </html>

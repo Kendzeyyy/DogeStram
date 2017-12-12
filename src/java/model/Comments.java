@@ -65,10 +65,13 @@ public class Comments implements Serializable {
     public Comments(Integer commentId) {
         this.commentId = commentId;
     }
+    
+    
 
     public Integer getCommentId() {
         return commentId;
     }
+    
 
     public void setCommentId(Integer commentId) {
         this.commentId = commentId;

@@ -10,12 +10,20 @@
 package Controller;
  
 import static java.lang.System.out;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonBuilderFactory;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
 import javax.ws.rs.Produces;
 import javax.ws.rs.*;
 import javax.ws.rs.Path;
@@ -25,6 +33,7 @@ import javax.ws.rs.core.NewCookie;
 import javax.ws.rs.core.Response;
 import model.Users;
 import model.Photos;
+import model.Comments;
  
 /**
  * REST Web Service
@@ -47,6 +56,7 @@ public class DBService {
      * Retrieves representation of an instance of Controller.DBService
      * @return an instance of java.lang.String
      */
+    /*
     @GET
     @Produces(MediaType.APPLICATION_JSON)
 
@@ -54,7 +64,7 @@ public class DBService {
      
               
         return dbc.getAll();
-    }
+    }*/
  
    /* @POST
     @Produces(MediaType.APPLICATION_JSON)
@@ -69,9 +79,9 @@ public class DBService {
         return dbc.insert(u);
         
     }*/
-     @POST
+    @POST
     @Produces(MediaType.APPLICATION_JSON)
-        @Path("login")
+    @Path("login")
      public Response login(@FormParam("username") String name, @FormParam("password") String pass) {
         
                 Users u = new Users();
@@ -80,44 +90,37 @@ public class DBService {
                 //List<Photos> photos = dbc.getAllPhotos();
                 
                 
-            if (nameAndPassList.isEmpty()) {
+        if (nameAndPassList.isEmpty()) {
                 
                return null;
                 
                 
-            }else {
+        }else {
                 
             Users users = nameAndPassList.get(0);
-            int id = users.getId();
-            try{
-            URI indexuri = new URI("");
-            List<Photos> photos = dbc.findPhotosByUser(id);
-            StringBuilder data = new StringBuilder();
-            for(int i = 0; i < photos.size();i++){
-                data.append("Adder of photo: ");
-                Users photoadder = photos.get(i).getUserId();
-                data.append(photoadder.getId());
-                data.append("Photo location: ");
-                data.append(photos.get(i).getPhotoLocation());
-                data.append("\n");
-            }
-           NewCookie idcookie = new NewCookie("myIdCookie",""+id);
-            Response.ResponseBuilder rb = Response.ok(data.toString());
-            rb.contentLocation(indexuri);
-            Response response = rb.cookie(idcookie).build();
-                return response;
-            }catch(Exception e){
-                Response.ResponseBuilder rb = Response.status(1, e.toString());
-                Response responce = rb.build();
-                return responce;
-            }
+            /*
+            JsonBuilderFactory factory = Json.createBuilderFactory(null);
+            JsonObject value = factory.createObjectBuilder()
+                    .add("id", users.getId())
+                    .build();
             
-        }
+            String rtstrn ="{\"status\": \"ok\",\"cookie\": \"" +
+            users.getId()+"\"}";*/
+            
+            NewCookie cookie = new NewCookie("id",""+users.getId());
+            String cs = cookie.getName();
+            
+            return Response.ok(users,MediaType.APPLICATION_JSON).cookie(cookie).build();
+          
+            
+            }    
     }
+    
+     
     @POST
     @Produces(MediaType.APPLICATION_JSON)
         @Path("signup")
-     public List<Photos> signup(@FormParam("username") String name, @FormParam("password") String pass, @FormParam("password2") String pass2) {
+     public Users signup(@FormParam("username") String name, @FormParam("password") String pass, @FormParam("password2") String pass2) {
                 
                          Users u = new Users();
 
@@ -129,12 +132,8 @@ public class DBService {
             u.setName(name);
             u.setPasswd(pass);
             
-            return dbc.findPhotosOrganizedByDate(3, 0);
-            
-            
-            }
-            
-            
+            return dbc.insert(u);        
+            }            
      } 
         return null;
                 
@@ -153,7 +152,54 @@ public class DBService {
          
          
      }
-   
+     
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("addcomment") 
+    public JsonArray showComments(){
+        String retstring = "";
+        List<Comments> comments = dbc.findCommentsByPhoto(1);
+        return createJsonArrayFromList(createJsonObjectList(comments));
+    }
+    
+    private JsonArray createJsonArrayFromList(List<JsonObject> jlist) {
+    JsonArrayBuilder jb = Json.createArrayBuilder();
+      for (JsonObject item: jlist) {
+        jb.add(item);
+    }
+    
+    return jb.build();
+    }
+    
+    private List<JsonObject> createJsonObjectList(List<Comments> cl){
+        ArrayList<JsonObject> jl = new ArrayList();
+        for (int i = 0; i< cl.size();++i){
+            JsonBuilderFactory jbf = Json.createBuilderFactory(null);
+            JsonObject job = jbf.createObjectBuilder().add("name", cl.get(i).getUserId().getName())
+                    .add("comment", cl.get(i).getComment()).build();
+            jl.add(job); 
+        }
+        return jl;   
+    }
+    
+     private List<JsonObject> createJObjlistFromPhotosByDate(List<Photos> ph){
+        ArrayList<JsonObject> jl = new ArrayList();
+        for (int i = 0; i< ph.size();++i){
+            JsonBuilderFactory jbf = Json.createBuilderFactory(null);
+            JsonObject job = jbf.createObjectBuilder().add("path", ph.get(i).getPhotoLocation())
+                    .add("date", ph.get(i).getDateAdded().toString()).build();
+            jl.add(job); 
+        }
+        return jl;
+     }
+    
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("photosbydate")
+    public JsonArray getPhotos(){
+        return createJsonArrayFromList(createJObjlistFromPhotosByDate(dbc.findPhotosOrganizedByDate(10, 0)));
+    }
     
    
     /**

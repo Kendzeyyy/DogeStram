@@ -4,22 +4,36 @@
 Function to show images. One has to get images as json.
 get: servletName?kategoria=2
  */
-const showImages = (jsonImages) => {
-    const ul = document.querySelector('ul');
-    fetch(jsonImages).then((response) => {
+
+const showComments = () => {
+    let url = 'http://10.114.32.21:8080/dogestram/db/service/addcomment';
+    fetch(url).then(response =>
+        response.json())
+  .then((out) => {
+      console.log(out);
+      const iframe = document.querySelector('#iframe').contentWindow.document;
+iframe.open();
+iframe.write(out);
+iframe.close();
+  });
+  };
+
+const showImages = (url) => {
+    const ul = document.querySelector('main ul');
+    fetch(url).then((response) => {
         return response.json();
     }).then((json) => {
         json.forEach((image) => {
-            const li = document.createElement("li");
-            const img = document.createElement("IMG");
-            const figure = document.createElement("figure");
-            const figurecaption = document.createElement("figcaption");
-            const a = document.createElement("a");
+            let li = document.createElement("li");
+            let img = document.createElement("IMG");
+            let figure = document.createElement("figure");
+            let figurecaption = document.createElement("figcaption");
+            let a = document.createElement("a");
 
-            const figc= document.createTextNode(image.mediaTitle);
+            let figc= document.createTextNode("doggy");
 
             a.href =""; /*HREF NEEDED*/
-            img.src = ""; /*SRC NEEDED*/
+            img.src = `http://${image.path}`; /*SRC NEEDED*/
 
             a.appendChild(img);
             figurecaption.appendChild(figc);
@@ -30,6 +44,8 @@ const showImages = (jsonImages) => {
         });
     });
 };
+
+showImages("http://10.114.32.21:8080/dogestram/db/service/photosbydate");
 
 /*
 Get the elements and adding
